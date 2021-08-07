@@ -142,7 +142,7 @@ systembeepoff() { dialog --infobox "Getting rid of that retarded error beep soun
 
 finalize(){ \
 	dialog --infobox "Preparing welcome message..." 4 50
-	dialog --title "All done!" --msgbox "Finish! The script completed successfully without errors and all the programs and configuration files should be in place.\\n\\nTo run your new graphical environment, log out and log back in as your new user so to start Sway automatically in tty1).\\n\\n.t linuxobserver" 12 80
+	dialog --title "All done!" --msgbox "Finish! The script completed successfully without errors and all the programs and configuration files should be in place.\\n\\nTo run your new graphical environment, log out and log back in as your new user so to start Sway automatically in tty1)." 12 80
 	}
 
 ### THE ACTUAL SCRIPT ###
@@ -194,18 +194,24 @@ sed -i "s/-j2/-j$(nproc)/;s/^#MAKEFLAGS/MAKEFLAGS/" /etc/makepkg.conf
 
 manualinstall $aurhelper || error "Failed to install AUR helper."
 
+mkdir /etc/systemd/system/getty@tty1.service.d
+touch /etc/systemd/system/getty@tty1.service.d/skip.prompt.conf
+echo "[Service] \
+ExecStart= \
+ExecStart=-/usr/bin/agetty --skip-login --nonewline --noissue --autologin $name --noclear %I $TERM" >> /etc/systemd/system/getty@tty1.service.d/skip.prompt.conf
+
 # The command that does all the installing. Reads the progs.csv file and
 # installs each needed program the way required. Be sure to run this only after
 # the user has been created and has priviledges to run sudo without a password
 # and all build dependencies are installed.
 installationloop
 
-dialog --title "LARBS Installation" --infobox "Finally, installing \`libxft-bgra\` to enable color emoji in suckless software without crashes." 5 70
+dialog --title "Observer Installation" --infobox "Finally, installing \`libxft-bgra\` to enable color emoji in suckless software without crashes." 5 70
 yes | sudo -u "$name" $aurhelper -S libxft-bgra-git >/dev/null 2>&1
 
 # Install the dotfiles in the user's home directory
 putgitrepo "$dotfilesrepo" "/home/$name" "$repobranch"
-rm -f "/home/$name/README.md" "/home/$name/observer.gif" "/home/$name/observer1.png"  "/home/$name/observer2.png" "/home/$name/observer3.png"
+rm -f "/home/$name/README.md" "/home/$name/observer.gif" "/home/$name/observer1.png"  "/home/$name/observer2.png" "/home/$name/observer3.png"  "home/$name/.git"
 
 # Create default urls file if none exists.
 [ ! -f "/home/$name/.config/newsboat/urls" ] && echo "http://www.news.gr/rss.ashx

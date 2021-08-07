@@ -1,3 +1,4 @@
+![rice](rise.jpg)
 #  autorice
 ## Observer Sway enviroment install script
 ### Simple instructions

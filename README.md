@@ -1,5 +1,5 @@
 #  autorice
-## Observer sway enviroment install script
+## Observer Sway enviroment install script
 ### Simple instructions
    * On a fresh Arch Linux basic install git with the command ```sudo pacman -S git``` 
    * Download as root the autorise  ```git clone https://github.com/linuxobserver/autorice.git```

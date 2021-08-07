@@ -1,6 +1,6 @@
 #!/bin/sh
-# Linux Observe Auto Rice Script
-
+# Linux Observe Auto Rice Script (modified LARBS autorice)
+# Gredits and many thanks to  Luke Smith for his autorice script (lukesmith.xyz)
 
 
 ### OPTIONS AND VARIABLES ###

@@ -194,6 +194,8 @@ sed -i "s/-j2/-j$(nproc)/;s/^#MAKEFLAGS/MAKEFLAGS/" /etc/makepkg.conf
 
 manualinstall $aurhelper || error "Failed to install AUR helper."
 
+# Autologin
+
 mkdir /etc/systemd/system/getty@tty1.service.d
 touch /etc/systemd/system/getty@tty1.service.d/skip.prompt.conf
 echo "[Service] \

@@ -199,7 +199,8 @@ rm -rf /etc/systemd/system/getty@tty1.service.d
 mkdir /etc/systemd/system/getty@tty1.service.d
 touch /etc/systemd/system/getty@tty1.service.d/skip-prompt.conf
 sudo -u "$name" printf "[Service] \nExecStart= \nExecStart=-/usr/bin/agetty --skip-login --nonewline --noissue --autologin $name --noclear %%I \$TERM" >> /etc/systemd/system/getty@tty1.service.d/skip-prompt.conf
-
+# Adding user to group realtime for pro audio apps
+usermod -a -G realtime "$name"
 # The command that does all the installing. Reads the progs.csv file and
 # installs each needed program the way required. Be sure to run this only after
 # the user has been created and has priviledges to run sudo without a password

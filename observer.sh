@@ -15,7 +15,7 @@ while getopts ":a:r:b:p:h" o; do case "${o}" in
 esac done
 
 [ -z "$dotfilesrepo" ] && dotfilesrepo="https://github.com/linuxobserver/dots.git"
-[ -z "$progsfile" ] && progsfile="https://raw.githubusercontent.com/linuxobserver/dots/main/progs.csv"
+[ -z "$progsfile" ] && progsfile="https://raw.githubusercontent.com/linuxobserver/autorice/main/progs.csv"
 [ -z "$aurhelper" ] && aurhelper="yay"
 [ -z "$repobranch" ] && repobranch="main"
 
@@ -205,7 +205,7 @@ yes | sudo -u "$name" $aurhelper -S libxft-bgra-git >/dev/null 2>&1
 
 # Install the dotfiles in the user's home directory
 putgitrepo "$dotfilesrepo" "/home/$name" "$repobranch"
-rm -f "/home/$name/README.md" "/home/$name/observer.gif" "/home/$name/progs.csv" "/home/$name/observer1.png"  "/home/$name/observer2.png" "/home/$name/observer3.png"
+rm -f "/home/$name/README.md" "/home/$name/observer.gif" "/home/$name/observer1.png"  "/home/$name/observer2.png" "/home/$name/observer3.png"
 
 # Create default urls file if none exists.
 [ ! -f "/home/$name/.config/newsboat/urls" ] && echo "http://www.news.gr/rss.ashx
@@ -213,7 +213,7 @@ https://2daygeek.com/feed/
 https://www.youtube.com/feeds/videos.xml?channel_id=UCxI-F507MPRKP8FWDWVwhaw \"~Nick Levantis (YouTube)\"
 https://www.archlinux.org/feeds/news/" > "/home/$name/.config/newsboat/urls"
 # make git ignore deleted LICENSE & README.md files
-git update-index --assume-unchanged "/home/$name/README.md" "/home/$name/observer.gif" "/home/$name/progs.csv" "/home/$name/observer1.png"  "/home/$name/observer2.png" "/home/$name/observer3.png"
+git update-index --assume-unchanged "/home/$name/README.md" "/home/$name/observer.gif" "/home/$name/observer1.png"  "/home/$name/observer2.png" "/home/$name/observer3.png"
 
 # Most important command! Get rid of the beep!
 systembeepoff

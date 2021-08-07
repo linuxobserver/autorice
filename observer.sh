@@ -26,7 +26,7 @@ installpkg(){ pacman --noconfirm --needed -S "$1" >/dev/null 2>&1 ;}
 error() { echo "ERROR: $1" ; exit 1;}
 
 welcomemsg() { \
-	dialog --title "Welcome!" --msgbox "Auto-Rice Observer Script!\\n\\nThis script will automatically install on Arch linux a fully-featured Wayland Sway desktop.\\n\\n-linuxbserver" 10 60
+	dialog --title "Welcome!" --msgbox "Auto-Rice Observer Script!\\n\\nThis script will automatically install on Arch linux a fully-featured Wayland Sway desktop.\\n\\n-LinuxObserver" 10 60
 
 	dialog --colors --title "Important Note!" --yes-label "All ready!" --no-label "Return..." --yesno "Be sure your computer you has current pacman updates and refreshed Arch keyrings.\\n\\nIf it does not, the installation of some programs might fail." 8 70
 	}
@@ -200,6 +200,7 @@ mkdir /etc/systemd/system/getty@tty1.service.d
 touch /etc/systemd/system/getty@tty1.service.d/skip-prompt.conf
 sudo -u "$name" printf "[Service] \nExecStart= \nExecStart=-/usr/bin/agetty --skip-login --nonewline --noissue --autologin $name --noclear %%I \$TERM" >> /etc/systemd/system/getty@tty1.service.d/skip-prompt.conf
 # Adding user to group realtime for pro audio apps
+gpasswd -d "$name" realtime
 usermod -a -G realtime "$name"
 # The command that does all the installing. Reads the progs.csv file and
 # installs each needed program the way required. Be sure to run this only after

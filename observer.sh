@@ -196,9 +196,9 @@ manualinstall $aurhelper || error "Failed to install AUR helper."
 
 # Autologin
 
-mkdir /etc/systemd/system/getty@tty1.service.d
-touch /etc/systemd/system/getty@tty1.service.d/skip.prompt.conf
-echo "[Service] \
+sudo -u "$name" mkdir /etc/systemd/system/getty@tty1.service.d
+sudo -u "$name" touch /etc/systemd/system/getty@tty1.service.d/skip.prompt.conf
+sudo -u "$name" echo "[Service] \
 ExecStart= \
 ExecStart=-/usr/bin/agetty --skip-login --nonewline --noissue --autologin $name --noclear %I $TERM" >> /etc/systemd/system/getty@tty1.service.d/skip.prompt.conf
 
